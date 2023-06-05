@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -163,6 +165,34 @@ fun PokemonDetailScreen(
                         backgroundColor = Color.Transparent
                     )
                 )
+                // botones
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    onClick = {
+                        if(title.toUpperCase() == "Editar Pokemon"){
+
+                        }else if(title.toUpperCase() == "Crear Pokemon"){
+
+                        }
+                    }
+                ){
+                    Text(title.toUpperCase())
+                }
+                // boton eliminar
+                if(title.toUpperCase() == "Editar Pokemon".toUpperCase()){
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                        onClick = {
+
+                        }
+                    ){
+                        Text("Borrar Pokemon".toUpperCase())
+                    }
+                }
             }
         }
     }
