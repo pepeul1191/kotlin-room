@@ -58,13 +58,4 @@ class HomeViewModel: ViewModel() {
             }
         }
     }
-
-    fun unSetProfile(context: Context) {
-        thread {
-            // db
-            val database = LocalDB.getDatabase(context)
-            val profileKeyDao = database.profileKeyDao()
-            profileKeyDao.deleteAllProfileKeys()
-        }
-    }
 }

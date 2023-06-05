@@ -24,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import pe.edu.ulima.dbaccess.configs.LocalDB
 import pe.edu.ulima.dbaccess.models.beans.ProfileKey
 import pe.edu.ulima.dbaccess.ui.app.viewmodels.HomeViewModel
+import kotlin.concurrent.thread
 
 @Preview
 @Composable
@@ -155,8 +156,12 @@ fun MoreAction(
             DropdownMenuItem(
                 onClick = {
                     expanded = false
-                    val viewModel = HomeViewModel()
-                    viewModel.unSetProfile(context)
+                    thread {
+                        // db
+                        val database = LocalDB.getDatabase(context)
+                        val profileKeyDao = database.profileKeyDao()
+                        profileKeyDao.deleteAllProfileKeys()
+                    }
                     (context as? Activity)?.run {
                         finishAffinity()
                     }

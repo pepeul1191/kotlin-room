@@ -5,14 +5,16 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,6 +25,7 @@ import coil.compose.rememberImagePainter
 import pe.edu.ulima.dbaccess.models.beans.Pokemon
 import pe.edu.ulima.dbaccess.navigations.uis.TopBar
 import pe.edu.ulima.dbaccess.ui.app.viewmodels.HomeViewModel
+import pe.edu.ulima.dbaccess.R
 
 @Composable
 @Preview
@@ -67,10 +70,26 @@ fun HomeScreen(
                         .padding(bottom = 10.dp)
                         .clickable {
                             Log.d("POKEMON_SCREEN", pokemon.id.toString())
-                            navController.navigate("/pokemon/detalle?pokemon_id=${pokemon.id.toString()}")
+                            navController.navigate("/pokemon/edit?pokemon_id=${pokemon.id.toString()}")
                         },
                 )
             }
         }
+    }
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        FloatingActionButton(
+            onClick = {
+                navController.navigate("/pokemon/new")
+            },
+            content = {
+                Icon(
+                    Icons.Default.Add,
+                    contentDescription = null
+                ) },
+            modifier = Modifier.padding(20.dp)
+        )
     }
 }
