@@ -1,8 +1,6 @@
 package pe.edu.ulima.dbaccess.entities
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import pe.edu.ulima.dbaccess.models.beans.Pokemon
 
 @Dao
@@ -18,4 +16,13 @@ interface PokemonDao {
 
     @Query("SELECT * FROM pokemons WHERE id = :pokemonId")
     fun getPokemonById(pokemonId: Int): Pokemon?
+
+    @Update
+    fun updatePokemon(pokemon: Pokemon)
+
+    @Delete
+    fun deletePokemon(pokemon: Pokemon)
+
+    @Insert
+    fun insertPokemon(pokemon: Pokemon)
 }

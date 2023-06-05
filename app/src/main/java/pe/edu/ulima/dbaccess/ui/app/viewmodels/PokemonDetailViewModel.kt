@@ -80,4 +80,52 @@ class PokemonDetailViewModel: ViewModel() {
         this.updateNumber(0)
         this.updateName("")
     }
+
+    fun updatePokemon(context: Context){
+        thread {
+            val database = LocalDB.getDatabase(context)
+            val pokemonDao = database.pokemonDao()
+            val pokemon = Pokemon(
+                id = id.value!!,
+                name = name.value!!,
+                number = number.value!!,
+                weight = weight.value!!,
+                height = height.value!!,
+                imageUrl = imageUrl.value!!,
+            )
+            pokemonDao.updatePokemon(pokemon)
+        }
+    }
+
+    fun deletePokemon(context: Context){
+        thread {
+            val database = LocalDB.getDatabase(context)
+            val pokemonDao = database.pokemonDao()
+            val pokemon = Pokemon(
+                id = id.value!!,
+                name = name.value!!,
+                number = number.value!!,
+                weight = weight.value!!,
+                height = height.value!!,
+                imageUrl = imageUrl.value!!,
+            )
+            pokemonDao.deletePokemon(pokemon)
+        }
+    }
+
+    fun createPokemon(context: Context){
+        thread {
+            val database = LocalDB.getDatabase(context)
+            val pokemonDao = database.pokemonDao()
+            val pokemon = Pokemon(
+                id = id.value!!,
+                name = name.value!!,
+                number = number.value!!,
+                weight = weight.value!!,
+                height = height.value!!,
+                imageUrl = imageUrl.value!!,
+            )
+            pokemonDao.insertPokemon(pokemon)
+        }
+    }
 }

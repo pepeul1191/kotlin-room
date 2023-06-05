@@ -1,7 +1,9 @@
 package pe.edu.ulima.dbaccess.ui.app.screens
 
 import android.app.Activity
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -100,7 +102,7 @@ fun PokemonDetailScreen(
                 TextField(
                     value = imageUrl,
                     onValueChange = {
-                        viewModel.updateName(it)
+                        viewModel.updateImageUrl(it)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {
@@ -171,10 +173,15 @@ fun PokemonDetailScreen(
                         .fillMaxWidth()
                         .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                     onClick = {
+                        Log.d("POKEMON_SCREEN", title)
                         if(title.toUpperCase() == "Editar Pokemon"){
-
+                            Log.d("POKEMON_SCREEN", "Editar Pokemon")
+                            viewModel.updatePokemon(context)
+                            navController.navigate("/")
                         }else if(title.toUpperCase() == "Crear Pokemon"){
-
+                            Log.d("POKEMON_SCREEN", "Crear Pokemon")
+                            viewModel.createPokemon(context)
+                            navController.navigate("/")
                         }
                     }
                 ){
@@ -187,7 +194,9 @@ fun PokemonDetailScreen(
                             .fillMaxWidth()
                             .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                         onClick = {
-
+                            Log.d("POKEMON_SCREEN", "Borrar Pokemon")
+                            viewModel.deletePokemon(context)
+                            navController.navigate("/")
                         }
                     ){
                         Text("Borrar Pokemon".toUpperCase())
