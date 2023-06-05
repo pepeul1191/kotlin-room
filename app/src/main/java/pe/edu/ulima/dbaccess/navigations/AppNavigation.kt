@@ -1,5 +1,6 @@
 package pe.edu.ulima.dbaccess.navigations
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,7 +22,7 @@ fun AppNavigation(
             arguments = listOf(
             )
         ){
-
+            Log.d("AppNavigation", "++++++++++++++++++++++++++++++++++++")
             HomeScreen(
                 viewModel = HomeViewModel(),
                 navController
