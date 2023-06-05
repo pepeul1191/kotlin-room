@@ -27,6 +27,8 @@ class HomeViewModel: ViewModel() {
                 val database = LocalDB.getDatabase(activity as Context)
                 val profileKeyDao = database.profileKeyDao()
                 val profileKey: ProfileKey? = profileKeyDao.getProfileUserById(userId)
+                Log.d("HOME_VIEW_MODEL", "0 ++++++++++++++++++++++++++++++")
+                Log.d("HOME_VIEW_MODEL", profileKey.toString())
                 if(profileKey == null){
                     Log.d("HOME_VIEW_MODEL", "1 +++++++++++++++++++++++++++++++ IF")
                     //profileKeyDao.setFirstLoad(ProfileKeyEntity(userId = userId, firstLoad = true))
@@ -54,6 +56,15 @@ class HomeViewModel: ViewModel() {
                     ).show()
                 }
             }
+        }
+    }
+
+    fun unSetProfile(context: Context) {
+        thread {
+            // db
+            val database = LocalDB.getDatabase(context)
+            val profileKeyDao = database.profileKeyDao()
+            profileKeyDao.deleteAllProfileKeys()
         }
     }
 }

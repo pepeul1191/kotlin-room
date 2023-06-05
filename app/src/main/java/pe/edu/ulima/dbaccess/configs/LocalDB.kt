@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import pe.edu.ulima.dbaccess.models.beans.PokemonDao
-import pe.edu.ulima.dbaccess.daos.ProfileKeyDao
+import pe.edu.ulima.dbaccess.models.beans.ProfileKeyDao
 import pe.edu.ulima.dbaccess.models.beans.Pokemon
 import pe.edu.ulima.dbaccess.models.beans.ProfileKey
 

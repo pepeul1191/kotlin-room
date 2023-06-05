@@ -1,4 +1,4 @@
-package pe.edu.ulima.dbaccess.daos
+package pe.edu.ulima.dbaccess.models.beans
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -14,4 +14,7 @@ interface ProfileKeyDao {
     @Override
     @Query("SELECT * FROM profile_keys WHERE user_id = :userId")
     fun getProfileUserById(userId: Int): ProfileKey?
+
+    @Query("DELETE FROM profile_keys")
+    fun deleteAllProfileKeys()
 }

@@ -21,6 +21,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import pe.edu.ulima.dbaccess.models.beans.Pokemon
+import pe.edu.ulima.dbaccess.navigations.uis.TopBar
 import pe.edu.ulima.dbaccess.ui.app.viewmodels.HomeViewModel
 
 @Composable
@@ -46,7 +47,13 @@ fun HomeScreen(
     viewModel.setPokemons(activity)
     Column(
     ) {
-        Text("homeee")
+        TopBar(
+            showBottomSheetDialog = {
+
+            },
+            navController,
+            1
+        )
         LazyVerticalGrid(
             cells = GridCells.Fixed(5) // Specify the number of columns
         ) {
