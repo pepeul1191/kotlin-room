@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "pokemons")
 data class Pokemon(
-    @PrimaryKey(autoGenerate = false)
-    var id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
     var number: Int = 0,
     var name: String = "",
     var weight: Float = 0F,

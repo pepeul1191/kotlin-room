@@ -3,6 +3,7 @@ package pe.edu.ulima.dbaccess.ui.app.viewmodels
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -10,6 +11,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import kotlinx.coroutines.launch
 import pe.edu.ulima.dbaccess.configs.LocalDB
 import pe.edu.ulima.dbaccess.models.beans.Pokemon
 import pe.edu.ulima.dbaccess.models.beans.ProfileKey
@@ -69,6 +73,7 @@ class PokemonDetailViewModel: ViewModel() {
             this.updateImageUrl(pokemon!!.imageUrl)
             this.updateNumber(pokemon!!.number)
             this.updateName(pokemon!!.name)
+            this.updateId(id)
         }
     }
 
@@ -82,7 +87,9 @@ class PokemonDetailViewModel: ViewModel() {
     }
 
     fun updatePokemon(context: Context){
+        Log.d("POKEMON_DETAIL - Update", "antes")
         thread {
+            Log.d("POKEMON_DETAIL - Update", "hilo")
             val database = LocalDB.getDatabase(context)
             val pokemonDao = database.pokemonDao()
             val pokemon = Pokemon(
@@ -93,11 +100,13 @@ class PokemonDetailViewModel: ViewModel() {
                 height = height.value!!,
                 imageUrl = imageUrl.value!!,
             )
+            Log.d("POKEMON_DETAIL - Update", pokemon.toString())
             pokemonDao.updatePokemon(pokemon)
+            Log.d("POKEMON_DETAIL - Update", pokemon.toString())
         }
     }
 
-    fun deletePokemon(context: Context){
+    fun deletePokemon(context: Context, navController: NavController){
         thread {
             val database = LocalDB.getDatabase(context)
             val pokemonDao = database.pokemonDao()
@@ -109,8 +118,10 @@ class PokemonDetailViewModel: ViewModel() {
                 height = height.value!!,
                 imageUrl = imageUrl.value!!,
             )
+            Log.d("POKEMON_DETAIL - Delete", pokemon.toString())
             pokemonDao.deletePokemon(pokemon)
         }
+        navController.navigate("/")
     }
 
     fun createPokemon(context: Context){
@@ -125,6 +136,7 @@ class PokemonDetailViewModel: ViewModel() {
                 height = height.value!!,
                 imageUrl = imageUrl.value!!,
             )
+            Log.d("POKEMON_DETAIL - Crear", pokemon.toString())
             pokemonDao.insertPokemon(pokemon)
         }
     }
